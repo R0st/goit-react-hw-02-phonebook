@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import ContactForm from './component/ContactForm/ContactForm';
 import ContactList from './component/ContactList';
+import Filter from './component/Filter/Filter';
 // import Filter from './component/Filter';
 // import TodoList from './component/TodoList';
 
@@ -16,6 +17,10 @@ class App extends Component {
   filter: '',
 }
 
+  changeFilter = e => {
+    this.state({filter: e.currentTarget.value});
+}
+  
   addContact = (name, number) => {
     const contact = {
       id: uuidv4(),
@@ -43,13 +48,14 @@ class App extends Component {
   }
 
   render() {
-      const { contacts } = this.state;
+      const { contacts, filter } = this.state;
     return (
         <>
           <h1>Phonebook</h1>
-                     
+        
           <ContactForm onSubmit={this.formSubmitHandler} />
         <ContactList contacts={contacts} />
+        <Filter value={filter} onChange={this.changeFilter}/>
         {/* <FIlter /> */}
         
       </>
