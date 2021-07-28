@@ -3,8 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import ContactForm from './component/ContactForm/ContactForm';
 import ContactList from './component/ContactList';
 import Filter from './component/Filter/Filter';
-// import Filter from './component/Filter';
-// import TodoList from './component/TodoList';
 
 class App extends Component {
   state = {
@@ -47,15 +45,15 @@ if (!this.state.contacts.map(contact => contact.name).includes(name)) {
   //   console.log(data);
   // }
 
-getFilteredContacts = () => {
-  const {filter, contacts} = this.state;
-  const normalizedFilter = filter.toLowerCase();
+  getFilteredContacts = () => {
+    const {filter, contacts} = this.state;
+    const normalizedFilter = filter.toLowerCase();
   return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter),
+    contact.name.toLowerCase().includes(normalizedFilter),
     );
-}
+  }
 
-deleteContact = contactId => {
+  deleteContact = contactId => {
     this.setState(prevState=> ({
       contacts: prevState.contacts.filter(contact=>contact.id !==contactId)
     }))
