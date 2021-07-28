@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
 import { v4 as uuidv4 } from 'uuid';
-// import style from './ContactForm.module.css'
+import style from './ContactForm.module.css'
+import PropTypes from 'prop-types';
 
-class ContactForm extends Component {     
+class ContactForm extends Component {   
+
+     static propTypes = {
+        name: PropTypes.string,
+        number: PropTypes.number,
+    };
+      
     state = {
         number: "",
         name: "",
@@ -18,7 +25,7 @@ class ContactForm extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.onSubmit(this.state)
+        this.props.onSubmit(this.state.name, this.state.number)
         this.reset();
     };
 
@@ -27,10 +34,11 @@ class ContactForm extends Component {
     }
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label htmlFor={this.nameInputId}>
+            <form className={style.ContactForm} onSubmit={this.handleSubmit}>
+                <label className={style.ContactLabel} htmlFor={this.nameInputId}>
                     Имя
                     <input
+                        className={style.ContactInput}
                         type="text"
                         name="name"
                         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -41,9 +49,10 @@ class ContactForm extends Component {
                         onChange={this.handleChange}
                     />
                 </label>
-                <label htmlFor={this.numberInputId}>
+                <label htmlFor={this.numberInputId} className={style.ContactLabel}>
                     Номер
                     <input
+                        className={style.ContactInput}
                         type="tel"
                         name="number"
                         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -54,7 +63,9 @@ class ContactForm extends Component {
                         id={this.numberInputId}/>
                 </label>
 
-                <button type="submit">Add contact</button>
+                <button 
+                    className={style.ContactBtn}
+                    type="submit">Add contact</button>
             </form>
         );
     }   
